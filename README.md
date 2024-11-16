@@ -5,9 +5,10 @@
 
 | Date Started | Date Completed |
 | ------ | ------ |
-| 01/01/2020 | --/-/-- |
+| --/--/-- | --/-/-- |
 
 Uses Pygame to visualise 'stars' moving across a canvas.
+Inspired by a video from the [Coding Train](https://youtu.be/17WoOqgXsRM?feature=shared)
 
 [GIF of usage]
 
