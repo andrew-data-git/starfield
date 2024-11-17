@@ -1,5 +1,5 @@
 import random
-import pygame as pg
+import pygame
 import numpy as np
 from pygame.locals import *
 import sys
@@ -8,39 +8,33 @@ from star import Star
 # inspired by https://www.youtube.com/watch?v=17WoOqgXsRM&ab_channel=TheCodingTrain
 
 # Initial conditions
-WIDTH = 800
-HEIGHT = 800
-screen_colour = (0, 0, 0)
-star_colour = (255, 255, 255)
-num_stars = 50
-max_zoom = 100
+WIDTH = 400
+HEIGHT = 400
+num_stars = 10
 
 # Instantiate pygame
-pg.init()
-window = pg.display.set_mode((WIDTH, HEIGHT))
-main_clock = pg.time.Clock()
+pygame.init()
+DISPLAY = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # Create stars
 stars = [None]*num_stars
 for i, star in enumerate(stars):
-    stars[i] = Star(window, WIDTH, HEIGHT)
+    stars[i] = Star(DISPLAY, WIDTH, HEIGHT)
 
 # Main Loop ---------------------------------------------------------------------
 run = True
 while run:
     # Draw --------------------------
-    window.fill(screen_colour)
+    DISPLAY.fill((0,0,0))
     for star in stars:
+        star.show()
         star.update()
-        star.show(star_colour)
-    stars[0].display_zoom()
 
     # Run ----------------------------
-    pg.display.update()
-    main_clock.tick(1)
+    pygame.display.flip()
 
     # Buttons ------------------------
-    for event in pg.event.get():
+    for event in pygame.event.get():
         if event.type == MOUSEBUTTONDOWN:
-            pg.quit()
+            pygame.quit()
             sys.exit()
