@@ -5,12 +5,10 @@ from pygame.locals import *
 import sys
 from star import Star
 
-# inspired by https://www.youtube.com/watch?v=17WoOqgXsRM&ab_channel=TheCodingTrain
-
 # Initial conditions
-WIDTH = 400
-HEIGHT = 400
-num_stars = 10
+WIDTH = 600
+HEIGHT = 600
+num_stars = 1000
 
 # Instantiate pygame
 pygame.init()
@@ -19,7 +17,7 @@ DISPLAY = pygame.display.set_mode((WIDTH, HEIGHT))
 # Create stars
 stars = [None]*num_stars
 for i, star in enumerate(stars):
-    stars[i] = Star(DISPLAY, WIDTH, HEIGHT)
+    stars[i] = Star(DISPLAY)
 
 # Main Loop ---------------------------------------------------------------------
 run = True
@@ -27,7 +25,7 @@ while run:
     # Draw --------------------------
     DISPLAY.fill((0,0,0))
     for star in stars:
-        star.show()
+        # star.show()
         star.update()
 
     # Run ----------------------------
