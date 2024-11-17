@@ -10,9 +10,9 @@
 Uses Pygame to visualise 'stars' moving across a canvas.
 Inspired by a video from the [Coding Train](https://youtu.be/17WoOqgXsRM?feature=shared)
 
-[GIF of usage]
+![](https://github.com/andrew-data-git/starfield/blob/main/stars.gif)
 
 ## Features
 
-- feature 1
-- feature 2
+- Stars change size as closer to POV 
+
