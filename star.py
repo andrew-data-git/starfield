@@ -15,7 +15,7 @@ class Star:
         self.x, self.y = rd.randint(0, screen_width), rd.randint(0, screen_height)
         self.r, self.theta = convert_to_radians_from_centre(self.x, self.y, self.screen_centre)
         self.star_colour = (0,0,0)
-        self.speed = 0 # TODO this should depend on self.r
+        self.speed = 0
         self.star_width = 1
 
     def draw(self):
@@ -29,14 +29,13 @@ class Star:
             width=1) # star size
 
     def _update_position(self):
-        # Redraw condition, if star pos. further away than dist. of diagonal
+        '''Redraw condition, if star pos. further away than dist. of diagonal.'''
         if self.r < self.max_draw_dist:
-            self.r = self.r*(1+self.speed) # increase r closer it gets to 
-            self.star_width = self.star_width*(1.00001+self.speed) # and draw it larger
+            self.r = self.r*(1+self.speed)
+            self.star_width = self.star_width*(1.00001+self.speed)
             self.speed += 0.000001
         else: # Redraw...
             self.__init__(self.display)
-            # TODO is the below better?
             self.r = 0.5*self.r # redraw closer to centre
 
         self.x, self.y = convert_to_xy_from_top_left(
@@ -45,6 +44,7 @@ class Star:
             self.screen_centre)
         
     def _update_colour(self):
+        '''Make the colour fainter towards the centre.'''
         scale_factor = (self.r/self.max_draw_dist)
         if max(self.star_colour) + 1 > 254:
             self.star_colour = (254,254,254)
@@ -52,28 +52,11 @@ class Star:
             self.star_colour = (self.star_colour[0]+scale_factor,
                                 self.star_colour[1]+scale_factor,
                                 self.star_colour[2]+scale_factor)
-            
-    def _update_trail(self):
-        current_star_pos = (self.x+self.star_width/2,self.y+self.star_width/2) 
-        trail_start_pos = self.screen_centre # TODO should be a point somewhere along 
-                                             # radius, and move as star does
-        scale_factor = 0
-        trail_width_size = 1
-        trail_colour = (self.star_colour[0]*scale_factor,
-                        self.star_colour[1]*scale_factor,
-                        self.star_colour[2]*scale_factor)
-        pygame.draw.line(
-            self.display, 
-            trail_colour, 
-            current_star_pos,
-            trail_start_pos, 
-            trail_width_size)
         
     def update(self):
         '''Update star position, colour and it's trail'''
         self._update_position()
         self._update_colour()
-        self._update_trail()
         self.draw()
 
 
